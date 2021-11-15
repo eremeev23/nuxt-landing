@@ -1,7 +1,8 @@
 <template>
   <header class="header">
     <nav class="navigation">
-      <a href="https://www.studiokora.com/" target="_blank"><img src="../static/assets/images/logo_header.png" alt="logo"></a>
+      <a v-if="!scrolled" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header.png" alt="logo"></a>
+      <a v-if="scrolled" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header_scrolled.png" alt="logo"></a>
     
       <ul class="navigation__list">
         <li class="list__item">
@@ -60,12 +61,49 @@
 <script>
 export default {
   name: 'Header',
+  data() {
+    return {
+      scrolled: false,
+    }
+  },
+  mounted() {
+    const navigation = document.querySelector('.navigation');
+    const headerBox = document.querySelector('.header')
+
+    const navigationPosition = navigation.getBoundingClientRect().bottom;
+    const headerBoxPosition = headerBox.getBoundingClientRect().bottom;
+
+    if (navigationPosition - 120 > headerBoxPosition) {
+      navigation.classList.add('scrolled');
+      this.scrolled = true;
+    }
+
+    if (headerBoxPosition > navigationPosition) {
+      navigation.classList.remove('scrolled');
+      this.scrolled = false;
+    }
+
+    document.addEventListener('scroll', () => {
+      const navigation = document.querySelector('.navigation');
+      const headerBox = document.querySelector('.header')
+
+      const navigationPosition = navigation.getBoundingClientRect().bottom;
+      const headerBoxPosition = headerBox.getBoundingClientRect().bottom;
+
+      if (navigationPosition - 120 > headerBoxPosition) {
+        navigation.classList.add('scrolled');
+        this.scrolled = true;
+      }
+      if (headerBoxPosition > navigationPosition) {
+        navigation.classList.remove('scrolled');
+        this.scrolled = false;
+      }
+    });   
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
   
   .header {
     background-image: url('images/header-img.png');
@@ -73,7 +111,6 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    position: fixed;
 
     .navigation {
       height: 214px;
@@ -81,12 +118,15 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: fixed;
+      width: 100%;
+      transition: all .5s ease;
 
       .navigation__list {
-        flex: 1;
+        flex: 2;
         list-style: none;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         padding: 0 4vw;
 
         .list__item {
@@ -94,27 +134,55 @@ export default {
           font-size: 15px;
           
           .nav-link {
-            font-family: 'Roboto', sans-serif;
             text-decoration: none;
             color: #cccbc6;
+            transition: all .4s ease;
+          }
+          .nav-link:hover {
+            color: #fff;
           }
         }
       }
 
       .call-number {
-        font-family: 'Roboto', sans-serif;
         text-decoration: none;
         color: #fff;
         letter-spacing: 1px;
       }
     }
 
+    .scrolled {
+      transition: all .5s ease;
+      height: 88px;
+      background: #fff;
+      z-index: 10;
+
+      .navigation__list {
+
+        .list__item {
+
+          .nav-link {
+            text-decoration: none;
+            color: #131217;
+            transition: all .4s ease;
+          }
+
+          .nav-link:hover {
+            color: #000;
+          }
+        }
+      }
+
+      .call-number {
+          color: #131217;
+        }
+    }
+
     .title__wrapper {
-      margin: 100px auto;
+      margin: 310px auto;
       text-align: center;
       
       .motto {
-        font-family: 'Roboto', sans-serif;
         font-weight: 300;
         text-transform: uppercase;
         font-size: 20px;

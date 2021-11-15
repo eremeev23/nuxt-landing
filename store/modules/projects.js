@@ -4,7 +4,6 @@ export default {
     state: {  
         projects: [],
     },
-    // https://my-json-server.typicode.com/maxon32/projects-json/projects
     actions: {
         LoadProjectsFromApi: ({ commit }) => {
             return axios('https://my-json-server.typicode.com/maxon32/projects-json/projects', {

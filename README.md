@@ -8,6 +8,7 @@
  контакты и футер можно не верстать
  в слайдер проекты должны тянуться данные из апи, используя  внешний api (например https://jsonplaceholder.typicode.com/ posts)
  при клике на проект - попадаем на страницу конкретного  проекта (данные тоже тянем из тестового api)
+ https://www.figma.com/file/UBz6tIYzRKJFCgC8sX0hDp/StudioKora_Nuxt.js?node-id=0%3A1
 
 ## Build Setup
 
