@@ -2,34 +2,36 @@
   <div class="main__page">
     <Header />
     <!-- PAGE TITLE  -->
-    <h1 class="main__title">проекты</h1>
-    <span class="title__underline"></span>
-    <!-- SLIDER WRAPPER  -->
-    <div class="slider__wrapper">
-      <!-- SLIDER  -->
-      <div class="slider">
-        <!-- PREVIOUS SLIDE  -->
-        <button @click="prevSlide" class="prev-slide"><img src="../static/assets/images/arrow_left.png" alt="prev-slide"></button>
-        <!-- ONE SLIDE  -->
-        <div class="slide" :class="{active: project.id === slideIndex}" v-for="project in Projects" :key="project.id">
-          <nuxt-link exact no-prefetch class="router__link" :to="'/projects/project_id'+project.id">
-          <!-- SLIDE IMAGE  -->
-          <img :src=project.image :alt=project.name class="project__image">
-          <!-- DESCRIPTION  -->
-          <span class="project__theme" :class="{focused: project.id === slideIndex}"> 
-            {{ project.theme }}
-            <span class="project__square">
-             {{ project.square }} M²
+    <section class="arch__section">
+      <h1 class="main__title">проекты</h1>
+      <span class="title__underline"></span>
+      <!-- SLIDER WRAPPER  -->
+      <div class="slider__wrapper">
+        <!-- SLIDER  -->
+        <div class="slider">
+          <!-- PREVIOUS SLIDE  -->
+          <button class="prev-slide" @click="prevSlide"><img src="../static/assets/images/arrow_left.png" alt="prev-slide"></button>
+          <!-- ONE SLIDE  -->
+          <div v-for="project in Projects" :key="project.id" class="slide" :class="{active: project.id === slideIndex}">
+            <nuxt-link exact no-prefetch class="router__link" :to="'/projects/project_id'+project.id">
+            <!-- SLIDE IMAGE  -->
+            <img :src=project.image :alt=project.name class="project__image">
+            <!-- DESCRIPTION  -->
+            <span class="project__theme" :class="{focused: project.id === slideIndex}"> 
+              {{ project.theme }}
+              <span class="project__square">
+              {{ project.square }} M²
+              </span>
             </span>
-          </span>
-           <!-- SLIDE NAME  -->
-          <h3 class="project__name" :class="{focused: project.id === slideIndex}"> {{ project.name }}</h3>
-          </nuxt-link>
+            <!-- SLIDE NAME  -->
+            <h3 class="project__name" :class="{focused: project.id === slideIndex}"> {{ project.name }}</h3>
+            </nuxt-link>
+          </div>
+          <!-- NEXT SLIDE  -->
+          <button class="next-slide" @click="nextSlide"><img src="../static/assets/images/arrow_right.png" alt="next-slide"></button>
         </div>
-        <!-- NEXT SLIDE  -->
-        <button @click="nextSlide" class="next-slide"><img src="../static/assets/images/arrow_right.png" alt="next-slide"></button>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -63,6 +65,7 @@ export default {
         this.slideIndex++;   
       }
     },
+
     prevSlide() {
       const slider = document.querySelector('.slider');
       if (this.slideIndex > 1) {
@@ -72,7 +75,7 @@ export default {
       if (this.slideIndex === 1) {
         slider.style = `margin-left: 0`;
       }
-    }
+    },
   }
 }
 </script>
@@ -83,7 +86,7 @@ export default {
 .main__page {
   text-align: center;
   min-height: 100vh;
-  width: 100vw;
+  min-width: 100vw;
   background-image: linear-gradient(0deg, #ffffff80, #ffffff80);
   display: flex;
   flex-direction: column;
@@ -107,12 +110,11 @@ export default {
 
   .slider__wrapper {
     position: relative;
-    display: flex;
     margin-top: 62px;
     width: 68vw;
     margin-left: -58px;
 
-    .slider{
+    .slider {
       display: flex;
       margin-left: 0;
       width: 100%;
@@ -155,6 +157,7 @@ export default {
             font-family: 'Cormorant Garamond';
             font-size: 42px;
             letter-spacing: 2px;
+            margin-bottom: 20px;
           }
 
           .focused {

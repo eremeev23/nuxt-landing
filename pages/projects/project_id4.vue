@@ -1,14 +1,14 @@
 <template>
   <div class="conteiner">
     <Header :flatNav="flatNav" />
-
+    <!-- NAVIGATION  -->
     <section class="ptoject__info">
       <nav class="navigation__list">
         <nuxt-link to="/" class="link__main">Главная</nuxt-link>
         <nuxt-link exact to="/projects/project_id1" class="link__parent">{{ Projects[projectId].name }}</nuxt-link>
       </nav>
       <span class="underline"></span>
-
+    <!-- MAIN CONTENT  -->
       <h1 class="project__title">{{ Projects[projectId].title }}</h1>
 
       <p class="description">
@@ -51,9 +51,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #131217;
 
   .ptoject__info {
-    max-width: 60vw;
+    padding-top: 60px;
+    max-width: 50vw;
     text-align: center;
     
     .navigation__list {
@@ -61,18 +63,35 @@ export default {
 
       .link__main, .link__parent {
         text-decoration: none;
-        color: #000;
+        font-size: 10px;
+        color: #131217;
       }
 
       .link__main {
         font-weight: bold;
         margin-right: 20px;
       }
+
+      .link__parent {
+        color: #757470;
+      }
+    }
+
+    .underline {
+      display: inline-block;
+      margin: 13px 0;
+      height: 2px;
+      width: 166px;
+      background: #CCBB9E;
     }
 
     .project__title {
       text-transform: uppercase;
       font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 50.9091px;
+      line-height: 62px;
+      letter-spacing: 12px;
     }
 
     .project__image {
@@ -80,6 +99,10 @@ export default {
     }
 
     .description {
+      margin: 32px 0 10px;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 30px;
       text-align: justify;
     }
   }
