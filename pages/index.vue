@@ -53,19 +53,24 @@ export default {
     ...mapGetters(['Projects'])
   },
 
-  mounted() {
-    
-  },
-
   methods: {
     nextSlide() {
+      const slider = document.querySelector('.slider');
+      
       if (this.slideIndex < this.Projects.length) {
-        this.slideIndex++;
+        slider.style = `margin-left: calc(${-116*this.slideIndex}px - ${this.slideIndex * 68}vw)`;
+
+        this.slideIndex++;   
       }
     },
     prevSlide() {
+      const slider = document.querySelector('.slider');
       if (this.slideIndex > 1) {
         this.slideIndex--;
+        slider.style = `margin-left: calc(${-116*(this.slideIndex-1)}px - ${(this.slideIndex - 1) * 68}vw)`;
+      }
+      if (this.slideIndex === 1) {
+        slider.style = `margin-left: 0`;
       }
     }
   }
@@ -78,10 +83,12 @@ export default {
 .main__page {
   text-align: center;
   min-height: 100vh;
-  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+  width: 100vw;
+  background-image: linear-gradient(0deg, #ffffff80, #ffffff80);
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 
   .main__title {
     margin: 124px 0 10px;
@@ -102,13 +109,14 @@ export default {
     position: relative;
     display: flex;
     margin-top: 62px;
-    max-width: 68vw;
-    justify-content: center;
+    width: 68vw;
+    margin-left: -58px;
 
-    .slider {
+    .slider{
       display: flex;
       margin-left: 0;
-      width: 68vw;
+      width: 100%;
+      transition: all .8s ease;
 
       .slide {
         margin-right: 116px;
@@ -152,14 +160,15 @@ export default {
           .focused {
             display: block;
           }
-        }
+        } 
       }
-
+      
       .active {
         z-index: 1;
       }
 
       .prev-slide, .next-slide {
+        z-index: 10;
         position: absolute;
         top: 50%;
         transform: translateY(-100%);

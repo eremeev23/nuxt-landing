@@ -1,14 +1,14 @@
 <template>
   <div class="conteiner">
     <Header :flatNav="flatNav" />
-    <!-- NAVIGATION  -->
+
     <section class="ptoject__info">
       <nav class="navigation__list">
         <nuxt-link to="/" class="link__main">Главная</nuxt-link>
         <nuxt-link exact to="/projects/project_id1" class="link__parent">{{ Projects[projectId].name }}</nuxt-link>
       </nav>
       <span class="underline"></span>
-    <!-- MAIN CONTENT  -->
+
       <h1 class="project__title">{{ Projects[projectId].title }}</h1>
 
       <p class="description">
@@ -32,14 +32,14 @@ export default {
   data() {
     return {
       flatNav: false,
-      projectId: 0
+      projectId: 5
     }
-  },
-  computed: {
-    ...mapGetters(['Projects'])
   },
   created() {
     this.flatNav = true;
+  },
+  computed: {
+    ...mapGetters(['Projects'])
   },
 }
 </script>

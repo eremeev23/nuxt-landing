@@ -1,9 +1,10 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{flat: flatNav}">
     <nav class="navigation">
-      <a v-if="!scrolled" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header.png" alt="logo"></a>
-      <a v-if="scrolled" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header_scrolled.png" alt="logo"></a>
-    
+      <!-- LOGO  -->
+      <a v-if="!scrolled && !flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header.png" alt="logo"></a>
+      <a v-if="scrolled || flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header_scrolled.png" alt="logo"></a>
+      <!-- NAVIGATION  -->
       <ul class="navigation__list">
         <li class="list__item">
           <nuxt-link no-prefetch active-class='active' class="nav-link" to="/about/" target="_blank">
@@ -36,10 +37,10 @@
           </nuxt-link>
         </li>
       </ul>
-
+      <!-- CALL NUMBER  -->
       <a href="tel: +78126459810" class="call-number">+7 (812) 645 98 10</a>
     </nav>
-
+    <!-- HEADER CONTENT  -->
     <div class="title__wrapper">
       <span class="motto">
         Меняем качество жизни
@@ -66,6 +67,12 @@ export default {
       scrolled: false,
     }
   },
+  props: {
+    flatNav: {
+      type: Boolean,
+      default: false
+    }
+  },
   mounted() {
     const navigation = document.querySelector('.navigation');
     const headerBox = document.querySelector('.header')
@@ -73,11 +80,10 @@ export default {
     const navigationPosition = navigation.getBoundingClientRect().bottom;
     const headerBoxPosition = headerBox.getBoundingClientRect().bottom;
 
-    if (navigationPosition - 120 > headerBoxPosition) {
+    if (navigationPosition - 120 > headerBoxPosition || this.flatNav) {
       navigation.classList.add('scrolled');
       this.scrolled = true;
     }
-
     if (headerBoxPosition > navigationPosition) {
       navigation.classList.remove('scrolled');
       this.scrolled = false;
@@ -86,9 +92,9 @@ export default {
     document.addEventListener('scroll', () => {
       const navigation = document.querySelector('.navigation');
       const headerBox = document.querySelector('.header')
-
-      const navigationPosition = navigation.getBoundingClientRect().bottom;
+      
       const headerBoxPosition = headerBox.getBoundingClientRect().bottom;
+      const navigationPosition = navigation.getBoundingClientRect().bottom;
 
       if (navigationPosition - 120 > headerBoxPosition) {
         navigation.classList.add('scrolled');
@@ -175,7 +181,7 @@ export default {
 
       .call-number {
           color: #131217;
-        }
+      }
     }
 
     .title__wrapper {
@@ -210,5 +216,38 @@ export default {
         margin: 25px 0 50px;
       }
     }
+  }
+
+  .flat {
+    background: #fff;
+    height: 88px;
+    .navigation {
+      height: 88px;
+      position: static;
+
+      .navigation__list {
+
+        .list__item {
+
+          .nav-link {
+            text-decoration: none;
+            color: #131217;
+            transition: all .4s ease;
+          }
+
+          .nav-link:hover {
+            color: #000;
+          }
+        }
+      }
+
+      .call-number {
+        color: #131217;
+      }
+    }
+
+    .title__wrapper {
+      display: none;
+    }  
   }
 </style>
