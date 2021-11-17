@@ -17,14 +17,16 @@
             <!-- SLIDE IMAGE  -->
             <img :src=project.image :alt=project.name class="project__image">
             <!-- DESCRIPTION  -->
-            <span class="project__theme" :class="{focused: project.id === slideIndex}"> 
-              {{ project.theme }}
-              <span class="project__square">
-              {{ project.square }} M²
-              </span>
-            </span>
-            <!-- SLIDE NAME  -->
-            <h3 class="project__name" :class="{focused: project.id === slideIndex}"> {{ project.name }}</h3>
+            <div class="project__description">
+              <span class="project__theme" :class="{focused: project.id === slideIndex}"> 
+                {{ project.theme }}
+                <span class="project__square">
+                {{ project.square }} M²
+                </span>
+              </span><!-- SLIDE NAME  -->
+              <h3 class="project__name" :class="{focused: project.id === slideIndex}"> {{ project.name }}</h3>
+            </div>
+            
             </nuxt-link>
           </div>
           <!-- NEXT SLIDE  -->
@@ -60,7 +62,7 @@ export default {
       const slider = document.querySelector('.slider');
       
       if (this.slideIndex < this.Projects.length) {
-        slider.style = `margin-left: calc(${-116*this.slideIndex}px - ${this.slideIndex * 68}vw)`;
+        slider.style = `margin-left: calc(${-116*this.slideIndex}px - ${this.slideIndex * 80}vw)`;
 
         this.slideIndex++;   
       }
@@ -70,7 +72,7 @@ export default {
       const slider = document.querySelector('.slider');
       if (this.slideIndex > 1) {
         this.slideIndex--;
-        slider.style = `margin-left: calc(${-116*(this.slideIndex-1)}px - ${(this.slideIndex - 1) * 68}vw)`;
+        slider.style = `margin-left: calc(${-116*(this.slideIndex-1)}px - ${(this.slideIndex - 1) * 80}vw)`;
       }
       if (this.slideIndex === 1) {
         slider.style = `margin-left: 0`;
@@ -93,96 +95,136 @@ export default {
   align-items: center;
   overflow: hidden;
 
-  .main__title {
-    margin: 124px 0 10px;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    font-size: 38px;
-    text-transform: uppercase;
-  }
+  .arch__section {
+    width: 80vw;
+    margin-left: 116px;
 
-  .title__underline {
-    display: inline-block;
-    height: 3px;
-    width: 127px;
-    background: #d7ae7a94;
-  }
+    .main__title {
+      margin: 124px 0 10px -58px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 38px;
+      text-transform: uppercase;
+    }
 
-  .slider__wrapper {
-    position: relative;
-    margin-top: 62px;
-    width: 68vw;
-    margin-left: -58px;
+    .title__underline {
+      margin-left: -58px;
+      display: inline-block;
+      height: 3px;
+      width: 127px;
+      background: #d7ae7a94;
+    }
 
-    .slider {
-      display: flex;
-      margin-left: 0;
-      width: 100%;
-      transition: all .8s ease;
+    .slider__wrapper {
+      position: relative;
+      margin-top: 62px;
+      width: 80vw;
+      margin-left: -58px;
 
-      .slide {
-        margin-right: 116px;
-        max-width: 100%;
-        z-index: -1;
-        font-family: 'PT Sans', sans-serif;
+      .slider {
+        display: flex;
+        margin-left: 0;
+        width: 100%;
+        transition: all .8s ease;
+
+        .slide {
+          margin-right: 116px;
+          max-width: 100%;
+          z-index: -1;
+          font-family: 'PT Sans', sans-serif;
+          
+
+          .router__link {
+            text-decoration: none;
+            color: #131217;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .project__image {
+              width: 80vw;
+            }
+
+            .project__description {
+              display: flex;
+
+              .project__theme {
+                display: none;
+                margin: 37px 0 10px;
+                font-size: 12px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+
+                .project__square {
+                font-size: 12px;
+                font-weight: bold;
+                color: #BF9C62;
+                }
+              }
+
+              .project__name {
+                display: none;
+                font-family: 'Cormorant Garamond';
+                font-size: 42px;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+              }
+
+              .focused {
+                display: block;
+              }
+            }          
+          } 
+        }
         
+        .active {
+          z-index: 1;
+        }
 
-        .router__link {
-          text-decoration: none;
-          color: #131217;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
+        .prev-slide, .next-slide {
+          z-index: 10;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-100%);
+        }
 
-          .project__image {
-            width: 68vw;
-          }
+        .prev-slide {
+          left: -4vw;
+        }
 
-          .project__theme {
-            display: none;
-            margin: 37px 0 10px;
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .next-slide {
+          right: -4vw;
+        }
+      }
+    }
+  }
+}
 
-            .project__square {
-            font-size: 12px;
-            font-weight: bold;
-            color: #BF9C62;
+@media (max-width: 420px) {
+  .main__page {
+    .slider__wrapper {
+      width: 80vw;
+      .slider {
+        
+        .slide {
+          width: 80vw;
+          .router__link {
+            .project__image {
+                width: 80vw;
+            }
+
+            .project__description {
+              display: flex;
+              flex-direction: row-reverse;
+              justify-content: space-between;
+
+              .project__name {
+                font-weight: normal;
+                font-size: 24px;
+              }
             }
           }
-
-          .project__name {
-            display: none;
-            font-family: 'Cormorant Garamond';
-            font-size: 42px;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-          }
-
-          .focused {
-            display: block;
-          }
-        } 
-      }
-      
-      .active {
-        z-index: 1;
-      }
-
-      .prev-slide, .next-slide {
-        z-index: 10;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-100%);
-      }
-
-      .prev-slide {
-        left: -4vw;
-      }
-
-      .next-slide {
-        right: -4vw;
+        }
       }
     }
   }

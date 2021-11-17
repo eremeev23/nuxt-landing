@@ -1,9 +1,12 @@
 <template>
   <header class="header" :class="{flat: flatNav}">
     <nav class="navigation">
+      <!-- PHONE ICON  -->
+      <img class="phone__icon" src="../static/assets/images/phone.png" alt="phone">
       <!-- LOGO  -->
-      <a v-if="!scrolled && !flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header.png" alt="logo"></a>
-      <a v-if="scrolled || flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header_scrolled.png" alt="logo"></a>
+      <a class="desktop__logo" v-if="!scrolled && !flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header.png" alt="logo"></a>
+      <a class="flat__logo" v-if="scrolled || flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header_scrolled.png" alt="logo"></a>
+      <a class="mob__logo" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_mobile.png" alt="logo"></a>
       <!-- NAVIGATION  -->
       <ul class="navigation__list">
         <li class="list__item">
@@ -44,6 +47,9 @@
 
         <a href="tel: +78126459810" class="call-number">+7 (812) 645 98 10</a>
       </div>
+      <button class="open__nav">
+        <span class="burger__menu"></span>
+      </button>
     </nav>
     <!-- HEADER CONTENT  -->
     <div class="title__wrapper">
@@ -163,6 +169,10 @@ export default {
       width: 100%;
       transition: all .5s ease;
 
+      .mob__logo {
+        display: none;
+      }
+
       .navigation__list {
         flex: 2;
         list-style: none;
@@ -195,6 +205,39 @@ export default {
           text-decoration: none;
           color: #fff;
           letter-spacing: 1px;
+        }
+      }
+      .open__nav {
+        display: none;
+        padding: 14px 8px;
+        justify-content: center;
+        align-items: center;
+
+        .burger__menu {
+          display: none;
+          position: relative;
+          display: inline-block;
+          width: 24px;
+          height: 2px;
+          background: #B1AFA9;
+        }
+
+        .burger__menu::before, .burger__menu::after {
+          position: absolute;
+          content: '';
+          right: 0;
+          height: 2px;
+          background: #B1AFA9;
+        }
+
+        .burger__menu::before {
+          top: -7px;       
+          width: 21px;
+        }
+
+        .burger__menu::after {
+          top: 7px;       
+          width: 27px;
         }
       }
     }
@@ -310,4 +353,42 @@ export default {
       display: none;
     }  
   }
+
+@media (max-width: 440px) {
+  .header {
+
+    .navigation {
+      height: 86px;
+      padding: 0 5vw;
+      margin: 0;
+      border-bottom: 1px solid #ffffff26;
+      justify-content: space-between;
+
+      .desktop__logo, .flat__logo {
+        display: none;
+      }
+
+      .mob__logo {
+        display: flex;
+      }
+
+      .navigation__list {
+        display: none;
+      }
+
+      .open__nav {
+        display: flex;
+      }
+
+      .search-call {
+        .phone__icon {
+          display: flex;
+        }
+        .call-number {
+          display: none;
+        }
+      }
+    }
+  }
+}
 </style>
