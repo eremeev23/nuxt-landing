@@ -4,9 +4,9 @@
       <!-- PHONE ICON  -->
       <img class="phone__icon" src="../static/assets/images/phone.png" alt="phone">
       <!-- LOGO  -->
-      <a class="desktop__logo" v-if="!scrolled && !flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header.png" alt="logo"></a>
-      <a class="flat__logo" v-if="scrolled || flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header_scrolled.png" alt="logo"></a>
-      <!-- <a class="mob__logo" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_mobile.png" alt="logo"></a> -->
+      <a v-if="!scrolled && !flatNav" class="desktop__logo" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header.png" alt="logo"></a>
+      <a v-if="scrolled || flatNav" class="flat__logo" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header_scrolled.png" alt="logo"></a>
+      <a class="mob__logo" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_mobile.png" alt="logo"></a>
       <!-- NAVIGATION  -->
       <ul class="navigation__list">
         <li class="list__item">
@@ -47,7 +47,8 @@
 
         <a href="tel: +78126459810" class="call-number">+7 (812) 645 98 10</a>
       </div>
-      <button class="open__nav">
+      <!-- BURGER BUTTON  -->
+      <button class="open__nav" @click="openMenu">
         <span class="burger__menu"></span>
       </button>
     </nav>
@@ -145,6 +146,11 @@ export default {
     // OPEN SEARCH INPUT 
     openSearch() {
       this.openInput = !this.openInput;
+    },
+    // OPEN MENU
+    openMenu() {
+      const menu = document.querySelector('.navigation__list');
+      menu.classList.toggle('mobile__menu');
     }
   }
 }
@@ -169,7 +175,7 @@ export default {
       width: 100%;
       transition: all .5s ease;
 
-      .mob__logo {
+      .mob__logo, .phone__icon {
         display: none;
       }
 
@@ -241,7 +247,7 @@ export default {
         }
       }
     }
-
+/* STYLE FOR SCROLLED HEADER  */
     .scrolled {
       transition: all .5s ease;
       height: 88px;
@@ -308,7 +314,7 @@ export default {
       }
     }
   }
-
+/* STYLE FOR SHORT HEADER */
   .flat {
     background: #fff;
     height: 88px;
@@ -354,10 +360,28 @@ export default {
       display: none;
     }  
   }
+@media (max-width: 1440px) {
+  .header {
+    .navigation {
+      padding: 0 2vw;
 
+      .navigation__list {
+        .list__item {
+
+          .nav-link {
+            font-size: 14px;
+            text-decoration: none;
+            transition: all .4s ease;
+          }
+        }
+      }
+    }
+  }
+}
 @media (max-width: 440px) {
   .header {
     background-image: url('images/mob-header.png');
+    background-position: center;
     height: 733px;
 
     .navigation {
@@ -365,18 +389,59 @@ export default {
       padding: 0 5vw;
       margin: 0;
       border-bottom: 1px solid #ffffff26;
+      display: flex;
       justify-content: space-between;
+      z-index: 100;
 
       .desktop__logo, .flat__logo {
         display: none;
       }
 
-      .mob__logo {
-        display: flex;
+      .mob__logo, .phone__icon {
+        display: block;
+      }
+
+      .phone__icon {
+        padding: 0 10px;
       }
 
       .navigation__list {
         display: none;
+      }
+
+      .mobile__menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        background: #fff;
+        padding: 180px 20px;
+        z-index: -1;
+        animation: opening 1s;
+
+        .list__item {
+          font-size: 15px;
+          
+          .nav-link {
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #757470;
+            transition: all .4s ease;
+          }
+          .nav-link:hover {
+            color: #000;
+          }
+
+          .active-button {
+            padding: 0 0 7px 0;
+            color: #8F6B2D !important;
+            border-bottom: 1px solid #8F6B2D;
+          }
+        }
       }
 
       .open__nav {
@@ -384,12 +449,7 @@ export default {
       }
 
       .search-call {
-        .phone__icon {
-          display: flex;
-        }
-        .call-number {
-          display: none;
-        }
+        display: none;
       }
     }
 
@@ -414,4 +474,24 @@ export default {
     }
   }
 }
+
+.flat {
+    background: #fff;
+    height: 92px;
+
+    .navigation {
+      height: 100%;
+      position: static;
+    }  
+ }
+
+@keyframes opening {
+  from {
+    top: -100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
 </style>

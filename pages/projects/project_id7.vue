@@ -107,4 +107,62 @@ export default {
     }
   }
 }
+
+@media (max-width: 440px) {
+  .conteiner {
+    width: 100vw;
+    min-height: 120vh;
+
+    .ptoject__info {
+      padding-top: 10px;
+      max-width: 80vw;
+      text-align: center;
+      
+      .navigation__list {
+        text-transform: uppercase;
+
+        .link__main, .link__parent {
+          text-decoration: none;
+          font-size: 10px;
+          color: #131217;
+        }
+
+        .link__main {
+          font-weight: bold;
+          margin-right: 20px;
+        }
+
+        .link__parent {
+          color: #757470;
+        }
+      }
+
+      .underline {
+        display: inline-block;
+        margin: 13px 0;
+        height: 2px;
+        width: 166px;
+        background: #CCBB9E;
+      }
+
+      .project__title {
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 4px;
+      }
+
+      .project__image {
+        max-width: 100%;
+      }
+
+      .description {
+        margin: 32px 0 10px;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 30px;
+        text-align: justify;
+      }
+    }
+  }
+}
 </style>

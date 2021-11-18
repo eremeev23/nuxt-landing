@@ -23,7 +23,8 @@
                 <span class="project__square">
                 {{ project.square }} M²
                 </span>
-              </span><!-- SLIDE NAME  -->
+              </span>
+              <!-- SLIDE NAME  -->
               <h3 class="project__name" :class="{focused: project.id === slideIndex}"> {{ project.name }}</h3>
             </div>
             
@@ -58,6 +59,7 @@ export default {
   },
 
   methods: {
+// NEXT SLIDE
     nextSlide() {
       const slider = document.querySelector('.slider');
       
@@ -67,7 +69,7 @@ export default {
         this.slideIndex++;   
       }
     },
-
+// PREVIOUS SLIDE
     prevSlide() {
       const slider = document.querySelector('.slider');
       if (this.slideIndex > 1) {
@@ -202,75 +204,73 @@ export default {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 440px) {
   .main__page {
     .arch__section {
-    .main__title {
-      font-size: 28px;
-      margin: 97px 0 10px -100px;
-    }
-    .title__underline {
-      margin-left: -100px;
-      display: inline-block;
-      height: 3px;
-      width: 127px;
-      background: #d7ae7a94;
-    }
-    .slider__wrapper {
+      .main__title {
+        font-size: 28px;
+        margin: 97px 0 10px -116px;
+      }
+      
+      .title__underline {
+        margin-left: -116px;
+      }
 
-      .slider {
-        
-        .slide {
+      .slider__wrapper {
 
-          .router__link {
+        .slider {
+          
+          .slide {
 
-            .project__description {
-              width: 100%;
-              display: flex;
-              flex-direction: row-reverse;
-              justify-content: space-between;
-              align-items: center;
+            .router__link {
 
-              .project__name {
-                margin: 0;
-                font-weight: normal;
-                font-size: 22px;
-                letter-spacing: 0;
-              }
+              .project__description {
+                width: 100%;
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                align-items: center;
 
-              .project__theme {
-                margin: 0;
-                font-size: 10px;
-                letter-spacing: 1px;
-                text-transform: uppercase;
+                .project__name {
+                  margin: 0;
+                  font-weight: normal;
+                  font-size: 22px;
+                  letter-spacing: 0;
+                }
 
-                .project__square {
-                font-size: 12px;
-                font-weight: bold;
-                color: #BF9C62;
+                .project__theme {
+                  margin: 0;
+                  font-size: 10px;
+                  letter-spacing: 1px;
+                  text-transform: uppercase;
+
+                  .project__square {
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: #BF9C62;
+                  }
                 }
               }
             }
           }
-        }
 
-        .prev-slide, .next-slide {
-          padding: 5px;
-          background: #ffffff7e;
-          top: 50%;
-          transform: translateY(-60%) scale(.6);
-        }
+          .prev-slide, .next-slide {
+            padding: 5px;
+            background: #ffffff7e;
+            top: 50%;
+            transform: translateY(-60%) scale(.6);
+          }
 
-        .prev-slide {
-          left: -2vw;
-        }
+          .prev-slide {
+            left: -2vw;
+          }
 
-        .next-slide {
-          right: -2vw;
+          .next-slide {
+            right: -2vw;
+          }
         }
       }
     }
-  }
   }
 }
 </style>
