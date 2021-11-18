@@ -6,7 +6,7 @@
       <!-- LOGO  -->
       <a class="desktop__logo" v-if="!scrolled && !flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header.png" alt="logo"></a>
       <a class="flat__logo" v-if="scrolled || flatNav" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_header_scrolled.png" alt="logo"></a>
-      <a class="mob__logo" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_mobile.png" alt="logo"></a>
+      <!-- <a class="mob__logo" href="https://www.studiokora.com/" target="_blank" ><img src="../static/assets/images/logo_mobile.png" alt="logo"></a> -->
       <!-- NAVIGATION  -->
       <ul class="navigation__list">
         <li class="list__item">
@@ -312,6 +312,7 @@ export default {
   .flat {
     background: #fff;
     height: 88px;
+
     .navigation {
       height: 88px;
       position: static;
@@ -356,6 +357,8 @@ export default {
 
 @media (max-width: 440px) {
   .header {
+    background-image: url('images/mob-header.png');
+    height: 733px;
 
     .navigation {
       height: 86px;
@@ -387,6 +390,26 @@ export default {
         .call-number {
           display: none;
         }
+      }
+    }
+
+    .title__wrapper {
+      margin: 262px auto;
+      text-align: center;
+      
+      .motto {
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      .title__arch, .title__design {
+        margin: 36px 0 14px;
+        font-size: 32px;
+        letter-spacing: 1.5px;
+      }
+
+      .title__design {
+        margin: 17px 0 50px;
       }
     }
   }
